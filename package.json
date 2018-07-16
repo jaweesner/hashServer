@@ -4,7 +4,8 @@
   "description": "simple server to retrieve and store messages based on sha256 hash",
   "main": "server.js",
   "scripts": {
-    "test": "jest test"
+    "test": "jest test",
+    "dev-server": "nodemon server.js"
   },
   "author": "Jane Weesner",
   "license": "ISC",
