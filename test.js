@@ -35,7 +35,6 @@ describe('Server function', () => {
         expect(err).to.equal(null);
         expect(response).to.exist;
         expect(response.statusCode).to.equal(201);
-        //body = JSON.parse(body);
         expect(body.digest).to.equal('08c1497b65db88f4882ec8bbc9fbda357d3f42519a56f55668d6c16536690790');
         done();
       }
@@ -53,14 +52,26 @@ describe('Server function', () => {
         done();
       }
     )
-
-
+  })
+  it ('Should return a 500 error if server could not save to db', (done) => {
+    _redisClient.quit();
+    request.post({
+      url:'http://127.0.0.1:3000/messages/',
+      json: true,
+      body: {"message":"TEST VALUE2"}
+      }, (err, response, body) => {
+        expect(err).to.equal(null);
+        expect(response).to.exist;
+        expect(response.statusCode).to.equal(500);
+        expect(body.err_msg).to.equal('Could not add to database');
+        done();
+      }
+    )
   })
 
 
   after((done) => {
     _server.close(() => {
-      _redisClient.quit();
       done();
     });
   });

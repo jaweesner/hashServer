@@ -28,7 +28,7 @@ app.post('/messages', (request, response) => {
 
   client.set(messageHash, request.body.message, (err, reply)=>{
     if (err){
-      response.status(500).json({"err_msg":	"Could not add to database"});
+      response.status(500).json({"err_msg": "Could not add to database"});
     } else {
       response.status(201).json({"digest": messageHash});
     }
@@ -38,9 +38,9 @@ app.post('/messages', (request, response) => {
 app.get('/messages/:hash', (request, response, next) =>{
   client.get(request.params.hash, (err, reply) =>{
     if(err){
-      response.status(500).json({"err_msg":	"Database Error"});
+      response.status(500).json({"err_msg": "Database Error"});
     } else if (reply === null) {
-      response.status(404).json({"err_msg":	"Message not found"});
+      response.status(404).json({"err_msg": "Message not found"});
     } else {
       response.json({"message": reply});
     }
