@@ -22,12 +22,11 @@ const get256Hash = (message) => {
 const app = express();
 app.use(bodyParse.json());
 
+//handle routes
 app.post('/messages', (request, response) => {
-  //convert message to  hash
   let messageHash = get256Hash(request.body.message);
 
   client.set(messageHash, request.body.message, (err, reply)=>{
-    //on redis response, send post response
     if (err){
       response.status(500).json({"err_msg":	"Could not add to database"});
     } else {

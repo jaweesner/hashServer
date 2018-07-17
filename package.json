@@ -4,13 +4,15 @@
   "description": "simple server to retrieve and store messages based on sha256 hash",
   "main": "server.js",
   "scripts": {
-    "test": "jest test",
-    "dev-server": "nodemon server.js"
+    "test": "mocha test.js",
+    "dev-server": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Jane Weesner",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^23.4.0"
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "express": "^4.16.3",
