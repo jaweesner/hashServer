@@ -30,7 +30,7 @@ app.post('/messages', (request, response) => {
     if (err){
       response.status(500).json({"err_msg":	"Could not add to database"});
     } else {
-      response.status(201).json({"digest":	messageHash});
+      response.status(201).json({"digest": messageHash});
     }
   })
 })
@@ -50,4 +50,12 @@ app.get('/messages/:hash', (request, response, next) =>{
 
 //start listening to server port
 const PORT = 3000;
-app.listen(PORT, ()=>console.log(`server listening on ${PORT}`));
+const server = app.listen(PORT, ()=>console.log(`server listening on ${PORT}`));
+
+
+//only export for testing
+if (process.env.TESTCONTEXT === 'true'){
+  module.exports._get256Hash = get256Hash;
+  module.exports._redisClient = client;
+  module.exports._server = server;
+}
